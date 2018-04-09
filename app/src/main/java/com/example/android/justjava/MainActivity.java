@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import static android.util.Log.*;
@@ -29,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         CheckBox whippedCreamCheckbox = (CheckBox)findViewById(R.id.whipped_cream);
         boolean hasWhippedCream = whippedCreamCheckbox.isChecked();
+
+        CheckBox chocolateCheckbox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckbox.isChecked();
+
         int price = calculatePrice();
-        displayMessage(createOrderSummary(price, hasWhippedCream));
+        displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate));
 
     }
 
@@ -39,12 +44,14 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param price of the order
      * @param addWhippedCream is whether or not the user wants whipped cream
+     * @param addChocolate is whether or not the user wants chocolate
      * @return text summary
      */
 
-    private String createOrderSummary(int price, boolean addWhippedCream) {
+    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate) {
         String priceMessage = "Name: Buon Caffe";
         priceMessage += "\nAdd whipped cream? " +addWhippedCream;
+        priceMessage += "\nAdd Chocolate? " +addChocolate;
         priceMessage += "\nQuantity: " + quantity;
         priceMessage += "\nTotal: $" + price;
         priceMessage += "\nThank you!";
@@ -95,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
         Button orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
     }
+
+    EditText editText = (EditText) findViewById(R.id.name_field);
+
 
 
 }
